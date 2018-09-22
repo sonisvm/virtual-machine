@@ -1,0 +1,6 @@
+Script started on 2018-09-22 11:19:01-0700
+]0;sonia@ubuntu: ~/Documents/virtual-machine/memory[01;32msonia@ubuntu[00m:[01;34m~/Documents/virtual-machine/memory[00m$ cd ..
+]0;sonia@ubuntu: ~/Documents/virtual-machine[01;32msonia@ubuntu[00m:[01;34m~/Documents/virtual-machine[00m$ exit
+exit
+
+Script done on 2018-09-22 11:19:09-0700

@@ -36,13 +36,13 @@ static int calculatePcpuUsage(pcpuStatsPtr currPcpuStats, pcpuStatsPtr prevPcpuS
 	
 	for(int i=0; i<numPcpus; i++){ //0 corresponds to cpu0, 1 to cpu1 and so on
 		currPcpuStats[i].usage = 100*(currPcpuStats[i].time - prevPcpuStats[i].time)/(t*pow(10, 9));
-		//printf("cpu=%d, curr=%lld, prev=%lld", i, currPcpuStats[i].time, prevPcpuStats[i].time);
+		printf("cpu=%d, curr=%lld, prev=%lld\n", i, currPcpuStats[i].time, prevPcpuStats[i].time);
 	}
 	
 	return 0;
 }
 
-static pcpuStats getPcpuUsage(virConnectPtr conn, int cpuNum){
+/*static pcpuStats getPcpuUsage(virConnectPtr conn, int cpuNum){
 	
 	pcpuStats p ;
 	int nparams = 0;
@@ -66,7 +66,16 @@ static pcpuStats getPcpuUsage(virConnectPtr conn, int cpuNum){
 	p.usage=0.0;
 	return p;
 
+}*/
+static void getPcpuUsage(domainStatsPtr currDomainStats,pcpuStatsPtr currPcpuStats, int numDomains){
+	for(int i=0; i<numDomains; i++){
+		virVcpuInfoPtr info = malloc(sizeof(virVcpuInfo));
+		virDomainGetVcpus(currDomainStats[i].domain, info, 1, NULL, 0);
+		currPcpuStats[info->cpu].time += currDomainStats[i].time; 
+		printf("time for pcpu%d is %lld\n", info->cpu, currPcpuStats[info->cpu].time);
+	}
 }
+
 static domainStats getCurrVcpuTime(virDomainStatsRecordPtr dStats){
 	domainStats d;
 	d.domain = dStats->dom;
@@ -190,10 +199,8 @@ int main(int argc, char* argv[]){
 					} else {
 						int numPcpus = nodeInfo->cpus;
 						pcpuStatsPtr currPcpuStats = malloc(numPcpus*sizeof(pcpuStats));
-						//get the pcpu usage
-						for(int i=0; i<numPcpus; i++){
-							currPcpuStats[i] = getPcpuUsage(conn, i);
-						}
+						getPcpuUsage(currDomainStats, currPcpuStats, numDomains);
+						
 						if(prevNumPcpu!=0 && numPcpus==prevNumPcpu){ //if more pcpus were enabled, we can't compare at present
 							calculatePcpuUsage(currPcpuStats, prevPcpuStats, numPcpus, timeInterval);
 							
