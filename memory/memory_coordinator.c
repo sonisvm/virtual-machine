@@ -172,4 +172,6 @@ printf("domain=%d,maxMemory=%lld, inflated=%lld, memFree=%lld\n", i,memDomains[i
 		virDomainFree(activeDomains[i]);
 	}
 	free(activeDomains);
+	virConnectClose(conn);
+	return 0;
 }

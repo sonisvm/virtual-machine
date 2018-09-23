@@ -655,4 +655,50 @@ buffers:                 2892 KiB
 cached :               114012 KiB
 
 
------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+firsttest: 138.83984375 52.0703125
+secondtest: 139.03515625 51.6484375
+thirdtest: 139.71484375 51.640625
+fourthtest: 138.4375 62.69921875
+--------------------------------------------------------------------------------
+total  :              4099648 KiB
+free   :               722864 KiB
+buffers:                 2900 KiB
+cached :               114016 KiB
+
+
+--------------------------------------------------------------------------------
+firsttest: 138.83984375 52.0703125
+secondtest: 139.03515625 51.6484375
+thirdtest: 139.71484375 51.640625
+fourthtest: 138.4375 62.69921875
+--------------------------------------------------------------------------------
+total  :              4099648 KiB
+free   :               722236 KiB
+buffers:                 2900 KiB
+cached :               114024 KiB
+
+
+--------------------------------------------------------------------------------
+firsttest: 138.83984375 52.0703125
+secondtest: 139.03515625 51.6484375
+thirdtest: 139.71484375 51.640625
+fourthtest: 138.4375 62.69921875
+--------------------------------------------------------------------------------
+total  :              4099648 KiB
+free   :               722360 KiB
+buffers:                 2900 KiB
+cached :               114016 KiB
+
+
+--------------------------------------------------------------------------------
+^Z
+[1]+  Stopped                 ./monitor.py
+]0;sonia@ubuntu: ~/Downloads/cs6210Project1_test-master/test/memory[01;32msonia@ubuntu[00m:[01;34m~/Downloads/cs6210Project1_test-master/test/memory[00m$ x[Kexit
+exit
+There are stopped jobs.
+]0;sonia@ubuntu: ~/Downloads/cs6210Project1_test-master/test/memory[01;32msonia@ubuntu[00m:[01;34m~/Downloads/cs6210Project1_test-master/test/memory[00m$ exit
+Script done, file is 3.log
+]0;sonia@ubuntu: ~/Downloads/cs6210Project1_test-master/test/memory[01;32msonia@ubuntu[00m:[01;34m~/Downloads/cs6210Project1_test-master/test/memory[00m$ exit
+
+Script done on 2018-09-22 12:21:50-0700

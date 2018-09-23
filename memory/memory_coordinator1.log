@@ -978,4 +978,11 @@ cached :               114016 KiB
 --------------------------------------------------------------------------------
 ^Z
 [1]+  Stopped                 ./monitor.py
-]0;sonia@ubuntu: ~/Downloads/cs6210Project1_test-master/test/memory[01;32msonia@ubuntu[00m:[01;34m~/Downloads/cs6210Project1_test-master/test/memory
+]0;sonia@ubuntu: ~/Downloads/cs6210Project1_test-master/test/memory[01;32msonia@ubuntu[00m:[01;34m~/Downloads/cs6210Project1_test-master/test/memory[00m$ x[Kexit
+exit
+There are stopped jobs.
+]0;sonia@ubuntu: ~/Downloads/cs6210Project1_test-master/test/memory[01;32msonia@ubuntu[00m:[01;34m~/Downloads/cs6210Project1_test-master/test/memory[00m$ exit
+Script done, file is 3.log
+]0;sonia@ubuntu: ~/Downloads/cs6210Project1_test-master/test/memory[01;32msonia@ubuntu[00m:[01;34m~/Downloads/cs6210Project1_test-master/test/memory[00m$ exit
+Script done, file is 2.log
+]0;sonia@ubuntu: ~/Downloads/cs6210Project1_test-master/test/memory[01;32msonia@ubuntu[00m:[01;34m~/Downloads/cs6210Project1_test-master/test/memory[00m$ exit
