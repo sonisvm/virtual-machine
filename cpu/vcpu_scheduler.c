@@ -12,6 +12,7 @@ typedef struct domainStats {
 	virDomainPtr domain;
 	unsigned long long time;
 	double usage;
+	int cpuNum;
 } domainStats;
 
 typedef domainStats * domainStatsPtr;
@@ -37,7 +38,8 @@ static void calculatePcpuUsage(domainStatsPtr currDomainStats,pcpuStatsPtr currP
 		virVcpuInfoPtr info = malloc(sizeof(virVcpuInfo));
 		virDomainGetVcpus(currDomainStats[i].domain, info, 1, NULL, 0);
 		currPcpuStats[info->cpu].usage += currDomainStats[i].usage; 
-		printf("usage for pcpu%d is %lf\n", info->cpu, currPcpuStats[info->cpu].usage);
+		currDomainStats[i].cpuNum = info->cpu;
+		
 	}
 }
 
@@ -64,13 +66,14 @@ static domainStats getCurrVcpuTime(virDomainPtr domain){
 
 	d.time = cpuTime ;
 	d.usage = 0.0;
+	d.cpuNum = -1;
 	return d;
 }
 
 static void pinVcpuToPcpu(domainStatsPtr currDomainStats, pcpuStatsPtr currPcpuStats, int numDomains, int numPcpus){
 	double maxUsage = currPcpuStats[0].usage, minUsage = currPcpuStats[0].usage;
 
-	int freestPcpu = 0, busiestPcpu=0;
+	int freestPcpu = 0, busiestPcpu =0;
 
 	for(int i=1; i<numPcpus; i++){
 	
@@ -83,41 +86,41 @@ static void pinVcpuToPcpu(domainStatsPtr currDomainStats, pcpuStatsPtr currPcpuS
 			maxUsage = currPcpuStats[i].usage;
 		}
 	}
-	printf("maxUsage=%lf, minUsage=%lf\n", maxUsage, minUsage);
-	if(maxUsage - minUsage <= 35.0) {
-		printf("The pcpus are balanced\n");
-		return;
-	}	
 
-	//find the domain with heaviest and freest load
-	int busiestDomain = -1, freestDomain=-1;
-	maxUsage = INT_MIN, minUsage = INT_MAX;
+	
+	int busiestDomain = -1;
+	unsigned char cpuMap;
+	if(maxUsage - minUsage > 10.0) {
+		//in the pcpu with heaviest load find the busiest domain
+		
+		maxUsage = INT_MIN;
+		for(int i=0; i<numDomains; i++){
+
+			if(currDomainStats[i].cpuNum == busiestPcpu){
+				if(currDomainStats[i].usage > maxUsage){
+					busiestDomain = i;
+					maxUsage = currDomainStats[i].usage;
+				}
+			}
+		}
+		cpuMap = 0x1 << freestPcpu;
+		
+		//pin the busiest domain to freest pcpu
+		if(virDomainPinVcpu(currDomainStats[busiestDomain].domain, 0, &cpuMap, (numPcpus/8)+1)==-1){
+			printf("Unable to pin vcpu to pcpu");
+		}
+	}
+	//for all other domains, just pin it to the cpu they were running on
 	for(int i=0; i<numDomains; i++){
-		if(currDomainStats[i].usage > maxUsage){
-			busiestDomain = i;
-			maxUsage = currDomainStats[i].usage;
+		if(i!=busiestDomain){
+			int cpu = currDomainStats[i].cpuNum;
+			cpuMap = 0x1 << cpu;
+			if(virDomainPinVcpu(currDomainStats[i].domain, 0, &cpuMap, (numPcpus/8)+1)==-1){
+				printf("Unable to pin vcpu to pcpu");
+			}
 		}
-		if(currDomainStats[i].usage < minUsage){
-			freestDomain = i;
-			minUsage = currDomainStats[i].usage;
-		}
-	}
-	if(busiestDomain ==-1) return;
-	
-
-	unsigned char cpuMap = 0x1 << freestPcpu;
-	printf("cpuMap=%d\n", cpuMap);fflush(stdout);
-
-	
-	if(virDomainPinVcpu(currDomainStats[busiestDomain].domain, 0, &cpuMap, (numPcpus/8)+1)==-1){
-		printf("Unable to pin vcpu to pcpu");
 	}
 
-	cpuMap = 0x1 << busiestPcpu;
-	printf("cpuMap=%d\n", cpuMap);fflush(stdout);
-	if(virDomainPinVcpu(currDomainStats[freestDomain].domain, 0, &cpuMap, (numPcpus/8)+1)==-1){
-		printf("Unable to pin vcpu to pcpu");
-	}
 }
 
 
@@ -151,7 +154,6 @@ int main(int argc, char* argv[]){
 		memset(currDomainStats, 0, numDomains*sizeof(domainStats));
 		for(int i=0; i<numDomains; i++){
 			currDomainStats[i] = getCurrVcpuTime(activeDomains[i]);
-			printf("domain=%d, cputime =%lld\n", i, currDomainStats[i].time);fflush(stdout);
 		}
 		
 		virNodeInfoPtr nodeInfo = malloc(sizeof(virNodeInfo));
