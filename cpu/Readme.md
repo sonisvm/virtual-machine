@@ -30,13 +30,14 @@ The policy used for load balancing is as below:
 #### Algorithm
 1. Connect to hypervisor using `virConnectOpen()`.
 2. Get the list of all active and running domains using `virConnectListAllDomains()`.
-3. Create an array of `domainStatsPtr` called `currDomainStats` to hold the statistics information of each domain.
-4. Invoke `getCurrVcpuTime()` to get the current vcpu statistics.
+3. Initialize `prevDomainStats` as an empty structure. This structure will be used to store the statistics information from previous run.
+4. Create an array of `domainStatsPtr` called `currDomainStats` to hold the statistics information of each domain.
+5. Invoke `getCurrVcpuTime()` to get the current vcpu statistics.
 	1. `getCurrVcpuTime` makes use of `virDomainGetCPUStats()` to get the statistics.
 	2. The vcpu time is extracted from `cpu_time` parameter.
-5. Invoke `virNodeGetInfo()` to get the number of pcpus in the system.
-6. Create an array of `pcpuStatsPtr` called `currPcpuStats` to hold the statistics about each pcpu.
-7. If `prevDomainStats` i.e. information about domain statistics calculated in previous run is not empty
+6. Invoke `virNodeGetInfo()` to get the number of pcpus in the system.
+7. Create an array of `pcpuStatsPtr` called `currPcpuStats` to hold the statistics about each pcpu.
+8. If `prevDomainStats` i.e. information about domain statistics calculated in previous run is not empty
 	1. Invoke `calculateDomainUsage()` to calculate the vcpu usage for each domain.
 		1.  Usage is calculated as (vcpu time in current run - vcpu time in previous run)/ (t * 10^9) where `t` is the time interval between which the scheduler runs.
 	2. Invoke `calculatePcpuUsage()` function to calculate the pcpu usage for each pcpu
@@ -47,5 +48,5 @@ The policy used for load balancing is as below:
 			1. Find the busiest vcpu running on the busiest pcpu.
 			2. Pin the busiest vcpu to the freest pcpu.
 		3. Pin all the vcpus (except the busiest one if such a vcpu was found in previous step) to whichever pcpus they were running on.
-8. Store `currDomainStats` in `PrevDomainStats` to use for the next run.
-9. Sleep for the specified time interval `t` and then start again from step 3. 
+9. Store `currDomainStats` in `PrevDomainStats` to use for the next run.
+10. Sleep for the specified time interval `t` and then start again from step 4. 
