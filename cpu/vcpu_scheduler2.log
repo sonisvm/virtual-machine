@@ -1,0 +1,325 @@
+Script started on 2018-09-28 16:54:03-0700
+]0;sonia@ubuntu: ~/Downloads/cs6210Project1_test-master/test/cpu[01;32msonia@ubuntu[00m:[01;34m~/Downloads/cs6210Project1_test-master/test/cpu[00m$ ./monitor.py 
+firsttest: ([(0, 1, 39430000000L, 1)], [(False, True, False, False)])
+secondtest: ([(0, 1, 40250000000L, 2)], [(False, False, True, False)])
+thirdtest: ([(0, 1, 39490000000L, 0)], [(True, False, False, False)])
+fourthtest: ([(0, 1, 39570000000L, 3)], [(False, False, False, True)])
+fifthtest: ([(0, 1, 38980000000L, 0)], [(True, False, False, False)])
+sixthtest: ([(0, 1, 40680000000L, 1)], [(False, True, False, False)])
+seventhtest: ([(0, 1, 40600000000L, 2)], [(False, False, True, False)])
+eigthtest: ([(0, 1, 40410000000L, 3)], [(False, False, False, True)])
+--------------------------------------------------------------------------------
+0: 0.0 []
+1: 0.0 []
+2: 0.0 []
+3: 0.0 []
+--------------------------------------------------------------------------------
+firsttest: ([(0, 1, 39430000000L, 1)], [(False, True, False, False)])
+secondtest: ([(0, 1, 40260000000L, 2)], [(False, False, True, False)])
+thirdtest: ([(0, 1, 39490000000L, 0)], [(True, False, False, False)])
+fourthtest: ([(0, 1, 39570000000L, 3)], [(False, False, False, True)])
+fifthtest: ([(0, 1, 38980000000L, 0)], [(True, False, False, False)])
+sixthtest: ([(0, 1, 40680000000L, 1)], [(False, True, False, False)])
+seventhtest: ([(0, 1, 40600000000L, 2)], [(False, False, True, False)])
+eigthtest: ([(0, 1, 40410000000L, 3)], [(False, False, False, True)])
+--------------------------------------------------------------------------------
+0: 0.0 ['thirdtest', 'fifthtest']
+1: 0.0 ['firsttest', 'sixthtest']
+2: 1.0 ['secondtest', 'seventhtest']
+3: 0.0 ['fourthtest', 'eigthtest']
+--------------------------------------------------------------------------------
+firsttest: ([(0, 1, 39430000000L, 0)], [(True, False, False, False)])
+secondtest: ([(0, 1, 40260000000L, 3)], [(False, False, False, True)])
+thirdtest: ([(0, 1, 39490000000L, 0)], [(True, False, False, False)])
+fourthtest: ([(0, 1, 39570000000L, 3)], [(False, False, False, True)])
+fifthtest: ([(0, 1, 38980000000L, 0)], [(True, False, False, False)])
+sixthtest: ([(0, 1, 40690000000L, 3)], [(False, False, False, True)])
+seventhtest: ([(0, 1, 40600000000L, 0)], [(True, False, False, False)])
+eigthtest: ([(0, 1, 40410000000L, 3)], [(False, False, False, True)])
+--------------------------------------------------------------------------------
+0: 0.0 ['firsttest', 'thirdtest', 'fifthtest', 'seventhtest']
+1: 0.0 []
+2: 0.0 []
+3: 1.0 ['secondtest', 'fourthtest', 'sixthtest', 'eigthtest']
+--------------------------------------------------------------------------------
+firsttest: ([(0, 1, 39440000000L, 0)], [(True, False, False, False)])
+secondtest: ([(0, 1, 40270000000L, 3)], [(False, False, False, True)])
+thirdtest: ([(0, 1, 39490000000L, 0)], [(True, False, False, False)])
+fourthtest: ([(0, 1, 39580000000L, 3)], [(False, False, False, True)])
+fifthtest: ([(0, 1, 38980000000L, 0)], [(True, False, False, False)])
+sixthtest: ([(0, 1, 40690000000L, 3)], [(False, False, False, True)])
+seventhtest: ([(0, 1, 40600000000L, 0)], [(True, False, False, False)])
+eigthtest: ([(0, 1, 40410000000L, 3)], [(False, False, False, True)])
+--------------------------------------------------------------------------------
+0: 1.0 ['firsttest', 'thirdtest', 'fifthtest', 'seventhtest']
+1: 0.0 []
+2: 0.0 []
+3: 2.0 ['secondtest', 'fourthtest', 'sixthtest', 'eigthtest']
+--------------------------------------------------------------------------------
+firsttest: ([(0, 1, 39440000000L, 0)], [(True, False, False, False)])
+secondtest: ([(0, 1, 40270000000L, 3)], [(False, False, False, True)])
+thirdtest: ([(0, 1, 39490000000L, 0)], [(True, False, False, False)])
+fourthtest: ([(0, 1, 39580000000L, 3)], [(False, False, False, True)])
+fifthtest: ([(0, 1, 38980000000L, 0)], [(True, False, False, False)])
+sixthtest: ([(0, 1, 40690000000L, 3)], [(False, False, False, True)])
+seventhtest: ([(0, 1, 40600000000L, 0)], [(True, False, False, False)])
+eigthtest: ([(0, 1, 40420000000L, 3)], [(False, False, False, True)])
+--------------------------------------------------------------------------------
+0: 0.0 ['firsttest', 'thirdtest', 'fifthtest', 'seventhtest']
+1: 0.0 []
+2: 0.0 []
+3: 1.0 ['secondtest', 'fourthtest', 'sixthtest', 'eigthtest']
+--------------------------------------------------------------------------------
+firsttest: ([(0, 1, 39530000000L, 0)], [(True, False, False, False)])
+secondtest: ([(0, 1, 40340000000L, 3)], [(False, False, False, True)])
+thirdtest: ([(0, 1, 39560000000L, 0)], [(True, False, False, False)])
+fourthtest: ([(0, 1, 39650000000L, 3)], [(False, False, False, True)])
+fifthtest: ([(0, 1, 39050000000L, 0)], [(True, False, False, False)])
+sixthtest: ([(0, 1, 40760000000L, 3)], [(False, False, False, True)])
+seventhtest: ([(0, 1, 40680000000L, 0)], [(True, False, False, False)])
+eigthtest: ([(0, 1, 40490000000L, 3)], [(False, False, False, True)])
+--------------------------------------------------------------------------------
+0: 31.0 ['firsttest', 'thirdtest', 'fifthtest', 'seventhtest']
+1: 0.0 []
+2: 0.0 []
+3: 28.0 ['secondtest', 'fourthtest', 'sixthtest', 'eigthtest']
+--------------------------------------------------------------------------------
+firsttest: ([(0, 1, 39770000000L, 0)], [(True, False, False, False)])
+secondtest: ([(0, 1, 40620000000L, 3)], [(False, False, False, True)])
+thirdtest: ([(0, 1, 39820000000L, 0)], [(True, False, False, False)])
+fourthtest: ([(0, 1, 39860000000L, 3)], [(False, False, False, True)])
+fifthtest: ([(0, 1, 39300000000L, 0)], [(True, False, False, False)])
+sixthtest: ([(0, 1, 40990000000L, 3)], [(False, False, False, True)])
+seventhtest: ([(0, 1, 40930000000L, 0)], [(True, False, False, False)])
+eigthtest: ([(0, 1, 40760000000L, 3)], [(False, False, False, True)])
+--------------------------------------------------------------------------------
+0: 100.0 ['firsttest', 'thirdtest', 'fifthtest', 'seventhtest']
+1: 0.0 []
+2: 0.0 []
+3: 99.0 ['secondtest', 'fourthtest', 'sixthtest', 'eigthtest']
+--------------------------------------------------------------------------------
+firsttest: ([(0, 1, 40030000000L, 0)], [(True, False, False, False)])
+secondtest: ([(0, 1, 40860000000L, 3)], [(False, False, False, True)])
+thirdtest: ([(0, 1, 40070000000L, 0)], [(True, False, False, False)])
+fourthtest: ([(0, 1, 40100000000L, 3)], [(False, False, False, True)])
+fifthtest: ([(0, 1, 39560000000L, 0)], [(True, False, False, False)])
+sixthtest: ([(0, 1, 41250000000L, 3)], [(False, False, False, True)])
+seventhtest: ([(0, 1, 41180000000L, 0)], [(True, False, False, False)])
+eigthtest: ([(0, 1, 41010000000L, 3)], [(False, False, False, True)])
+--------------------------------------------------------------------------------
+0: 102.0 ['firsttest', 'thirdtest', 'fifthtest', 'seventhtest']
+1: 0.0 []
+2: 0.0 []
+3: 99.0 ['secondtest', 'fourthtest', 'sixthtest', 'eigthtest']
+--------------------------------------------------------------------------------
+firsttest: ([(0, 1, 40330000000L, 0)], [(True, False, False, False)])
+secondtest: ([(0, 1, 41120000000L, 3)], [(False, False, False, True)])
+thirdtest: ([(0, 1, 40390000000L, 0)], [(True, False, False, False)])
+fourthtest: ([(0, 1, 40360000000L, 3)], [(False, False, False, True)])
+fifthtest: ([(0, 1, 39860000000L, 0)], [(True, False, False, False)])
+sixthtest: ([(0, 1, 41490000000L, 3)], [(False, False, False, True)])
+seventhtest: ([(0, 1, 41410000000L, 1)], [(False, True, False, False)])
+eigthtest: ([(0, 1, 41270000000L, 3)], [(False, False, False, True)])
+--------------------------------------------------------------------------------
+0: 92.0 ['firsttest', 'thirdtest', 'fifthtest']
+1: 23.0 ['seventhtest']
+2: 0.0 []
+3: 102.0 ['secondtest', 'fourthtest', 'sixthtest', 'eigthtest']
+--------------------------------------------------------------------------------
+firsttest: ([(0, 1, 40580000000L, 0)], [(True, False, False, False)])
+secondtest: ([(0, 1, 41370000000L, 3)], [(False, False, False, True)])
+thirdtest: ([(0, 1, 40620000000L, 2)], [(False, False, True, False)])
+fourthtest: ([(0, 1, 40610000000L, 3)], [(False, False, False, True)])
+fifthtest: ([(0, 1, 40110000000L, 0)], [(True, False, False, False)])
+sixthtest: ([(0, 1, 41740000000L, 3)], [(False, False, False, True)])
+seventhtest: ([(0, 1, 41580000000L, 1)], [(False, True, False, False)])
+eigthtest: ([(0, 1, 41520000000L, 3)], [(False, False, False, True)])
+--------------------------------------------------------------------------------
+0: 50.0 ['firsttest', 'fifthtest']
+1: 17.0 ['seventhtest']
+2: 23.0 ['thirdtest']
+3: 100.0 ['secondtest', 'fourthtest', 'sixthtest', 'eigthtest']
+--------------------------------------------------------------------------------
+firsttest: ([(0, 1, 40810000000L, 0)], [(True, False, False, False)])
+secondtest: ([(0, 1, 41680000000L, 3)], [(False, False, False, True)])
+thirdtest: ([(0, 1, 40840000000L, 2)], [(False, False, True, False)])
+fourthtest: ([(0, 1, 40850000000L, 1)], [(False, True, False, False)])
+fifthtest: ([(0, 1, 40340000000L, 0)], [(True, False, False, False)])
+sixthtest: ([(0, 1, 42060000000L, 3)], [(False, False, False, True)])
+seventhtest: ([(0, 1, 41820000000L, 1)], [(False, True, False, False)])
+eigthtest: ([(0, 1, 41830000000L, 3)], [(False, False, False, True)])
+--------------------------------------------------------------------------------
+0: 46.0 ['firsttest', 'fifthtest']
+1: 48.0 ['fourthtest', 'seventhtest']
+2: 22.0 ['thirdtest']
+3: 94.0 ['secondtest', 'sixthtest', 'eigthtest']
+--------------------------------------------------------------------------------
+firsttest: ([(0, 1, 41130000000L, 0)], [(True, False, False, False)])
+secondtest: ([(0, 1, 42010000000L, 3)], [(False, False, False, True)])
+thirdtest: ([(0, 1, 41140000000L, 2)], [(False, False, True, False)])
+fourthtest: ([(0, 1, 41170000000L, 1)], [(False, True, False, False)])
+fifthtest: ([(0, 1, 40660000000L, 0)], [(True, False, False, False)])
+sixthtest: ([(0, 1, 42380000000L, 3)], [(False, False, False, True)])
+seventhtest: ([(0, 1, 42130000000L, 1)], [(False, True, False, False)])
+eigthtest: ([(0, 1, 42150000000L, 2)], [(False, False, True, False)])
+--------------------------------------------------------------------------------
+0: 64.0 ['firsttest', 'fifthtest']
+1: 63.0 ['fourthtest', 'seventhtest']
+2: 62.0 ['thirdtest', 'eigthtest']
+3: 65.0 ['secondtest', 'sixthtest']
+--------------------------------------------------------------------------------
+firsttest: ([(0, 1, 41460000000L, 0)], [(True, False, False, False)])
+secondtest: ([(0, 1, 42330000000L, 3)], [(False, False, False, True)])
+thirdtest: ([(0, 1, 41460000000L, 2)], [(False, False, True, False)])
+fourthtest: ([(0, 1, 41490000000L, 1)], [(False, True, False, False)])
+fifthtest: ([(0, 1, 40980000000L, 0)], [(True, False, False, False)])
+sixthtest: ([(0, 1, 42710000000L, 3)], [(False, False, False, True)])
+seventhtest: ([(0, 1, 42450000000L, 1)], [(False, True, False, False)])
+eigthtest: ([(0, 1, 42470000000L, 2)], [(False, False, True, False)])
+--------------------------------------------------------------------------------
+0: 65.0 ['firsttest', 'fifthtest']
+1: 64.0 ['fourthtest', 'seventhtest']
+2: 64.0 ['thirdtest', 'eigthtest']
+3: 65.0 ['secondtest', 'sixthtest']
+--------------------------------------------------------------------------------
+firsttest: ([(0, 1, 41780000000L, 0)], [(True, False, False, False)])
+secondtest: ([(0, 1, 42650000000L, 3)], [(False, False, False, True)])
+thirdtest: ([(0, 1, 41780000000L, 2)], [(False, False, True, False)])
+fourthtest: ([(0, 1, 41810000000L, 1)], [(False, True, False, False)])
+fifthtest: ([(0, 1, 41310000000L, 0)], [(True, False, False, False)])
+sixthtest: ([(0, 1, 43030000000L, 3)], [(False, False, False, True)])
+seventhtest: ([(0, 1, 42770000000L, 1)], [(False, True, False, False)])
+eigthtest: ([(0, 1, 42790000000L, 2)], [(False, False, True, False)])
+--------------------------------------------------------------------------------
+0: 65.0 ['firsttest', 'fifthtest']
+1: 64.0 ['fourthtest', 'seventhtest']
+2: 64.0 ['thirdtest', 'eigthtest']
+3: 64.0 ['secondtest', 'sixthtest']
+--------------------------------------------------------------------------------
+firsttest: ([(0, 1, 42100000000L, 0)], [(True, False, False, False)])
+secondtest: ([(0, 1, 42960000000L, 3)], [(False, False, False, True)])
+thirdtest: ([(0, 1, 42080000000L, 2)], [(False, False, True, False)])
+fourthtest: ([(0, 1, 42120000000L, 1)], [(False, True, False, False)])
+fifthtest: ([(0, 1, 41630000000L, 0)], [(True, False, False, False)])
+sixthtest: ([(0, 1, 43340000000L, 3)], [(False, False, False, True)])
+seventhtest: ([(0, 1, 43090000000L, 1)], [(False, True, False, False)])
+eigthtest: ([(0, 1, 43090000000L, 2)], [(False, False, True, False)])
+--------------------------------------------------------------------------------
+0: 64.0 ['firsttest', 'fifthtest']
+1: 63.0 ['fourthtest', 'seventhtest']
+2: 60.0 ['thirdtest', 'eigthtest']
+3: 62.0 ['secondtest', 'sixthtest']
+--------------------------------------------------------------------------------
+firsttest: ([(0, 1, 42420000000L, 0)], [(True, False, False, False)])
+secondtest: ([(0, 1, 43290000000L, 3)], [(False, False, False, True)])
+thirdtest: ([(0, 1, 42400000000L, 2)], [(False, False, True, False)])
+fourthtest: ([(0, 1, 42440000000L, 1)], [(False, True, False, False)])
+fifthtest: ([(0, 1, 41960000000L, 0)], [(True, False, False, False)])
+sixthtest: ([(0, 1, 43670000000L, 3)], [(False, False, False, True)])
+seventhtest: ([(0, 1, 43410000000L, 1)], [(False, True, False, False)])
+eigthtest: ([(0, 1, 43410000000L, 2)], [(False, False, True, False)])
+--------------------------------------------------------------------------------
+0: 65.0 ['firsttest', 'fifthtest']
+1: 64.0 ['fourthtest', 'seventhtest']
+2: 64.0 ['thirdtest', 'eigthtest']
+3: 66.0 ['secondtest', 'sixthtest']
+--------------------------------------------------------------------------------
+firsttest: ([(0, 1, 42750000000L, 0)], [(True, False, False, False)])
+secondtest: ([(0, 1, 43620000000L, 3)], [(False, False, False, True)])
+thirdtest: ([(0, 1, 42710000000L, 2)], [(False, False, True, False)])
+fourthtest: ([(0, 1, 42760000000L, 1)], [(False, True, False, False)])
+fifthtest: ([(0, 1, 42280000000L, 0)], [(True, False, False, False)])
+sixthtest: ([(0, 1, 44000000000L, 3)], [(False, False, False, True)])
+seventhtest: ([(0, 1, 43730000000L, 1)], [(False, True, False, False)])
+eigthtest: ([(0, 1, 43730000000L, 2)], [(False, False, True, False)])
+--------------------------------------------------------------------------------
+0: 65.0 ['firsttest', 'fifthtest']
+1: 64.0 ['fourthtest', 'seventhtest']
+2: 63.0 ['thirdtest', 'eigthtest']
+3: 66.0 ['secondtest', 'sixthtest']
+--------------------------------------------------------------------------------
+firsttest: ([(0, 1, 43080000000L, 0)], [(True, False, False, False)])
+secondtest: ([(0, 1, 43960000000L, 3)], [(False, False, False, True)])
+thirdtest: ([(0, 1, 43050000000L, 2)], [(False, False, True, False)])
+fourthtest: ([(0, 1, 43110000000L, 1)], [(False, True, False, False)])
+fifthtest: ([(0, 1, 42620000000L, 0)], [(True, False, False, False)])
+sixthtest: ([(0, 1, 44340000000L, 3)], [(False, False, False, True)])
+seventhtest: ([(0, 1, 44060000000L, 1)], [(False, True, False, False)])
+eigthtest: ([(0, 1, 44060000000L, 2)], [(False, False, True, False)])
+--------------------------------------------------------------------------------
+0: 67.0 ['firsttest', 'fifthtest']
+1: 68.0 ['fourthtest', 'seventhtest']
+2: 67.0 ['thirdtest', 'eigthtest']
+3: 68.0 ['secondtest', 'sixthtest']
+--------------------------------------------------------------------------------
+firsttest: ([(0, 1, 43430000000L, 0)], [(True, False, False, False)])
+secondtest: ([(0, 1, 44290000000L, 3)], [(False, False, False, True)])
+thirdtest: ([(0, 1, 43380000000L, 2)], [(False, False, True, False)])
+fourthtest: ([(0, 1, 43440000000L, 1)], [(False, True, False, False)])
+fifthtest: ([(0, 1, 42950000000L, 0)], [(True, False, False, False)])
+sixthtest: ([(0, 1, 44680000000L, 3)], [(False, False, False, True)])
+seventhtest: ([(0, 1, 44390000000L, 1)], [(False, True, False, False)])
+eigthtest: ([(0, 1, 44390000000L, 2)], [(False, False, True, False)])
+--------------------------------------------------------------------------------
+0: 68.0 ['firsttest', 'fifthtest']
+1: 66.0 ['fourthtest', 'seventhtest']
+2: 66.0 ['thirdtest', 'eigthtest']
+3: 67.0 ['secondtest', 'sixthtest']
+--------------------------------------------------------------------------------
+firsttest: ([(0, 1, 43750000000L, 0)], [(True, False, False, False)])
+secondtest: ([(0, 1, 44620000000L, 3)], [(False, False, False, True)])
+thirdtest: ([(0, 1, 43690000000L, 2)], [(False, False, True, False)])
+fourthtest: ([(0, 1, 43760000000L, 1)], [(False, True, False, False)])
+fifthtest: ([(0, 1, 43280000000L, 0)], [(True, False, False, False)])
+sixthtest: ([(0, 1, 44990000000L, 3)], [(False, False, False, True)])
+seventhtest: ([(0, 1, 44710000000L, 1)], [(False, True, False, False)])
+eigthtest: ([(0, 1, 44700000000L, 2)], [(False, False, True, False)])
+--------------------------------------------------------------------------------
+0: 65.0 ['firsttest', 'fifthtest']
+1: 64.0 ['fourthtest', 'seventhtest']
+2: 62.0 ['thirdtest', 'eigthtest']
+3: 64.0 ['secondtest', 'sixthtest']
+--------------------------------------------------------------------------------
+firsttest: ([(0, 1, 44070000000L, 0)], [(True, False, False, False)])
+secondtest: ([(0, 1, 44940000000L, 3)], [(False, False, False, True)])
+thirdtest: ([(0, 1, 44000000000L, 2)], [(False, False, True, False)])
+fourthtest: ([(0, 1, 44080000000L, 1)], [(False, True, False, False)])
+fifthtest: ([(0, 1, 43600000000L, 0)], [(True, False, False, False)])
+sixthtest: ([(0, 1, 45310000000L, 3)], [(False, False, False, True)])
+seventhtest: ([(0, 1, 45040000000L, 1)], [(False, True, False, False)])
+eigthtest: ([(0, 1, 45020000000L, 2)], [(False, False, True, False)])
+--------------------------------------------------------------------------------
+0: 64.0 ['firsttest', 'fifthtest']
+1: 65.0 ['fourthtest', 'seventhtest']
+2: 63.0 ['thirdtest', 'eigthtest']
+3: 64.0 ['secondtest', 'sixthtest']
+--------------------------------------------------------------------------------
+firsttest: ([(0, 1, 44400000000L, 0)], [(True, False, False, False)])
+secondtest: ([(0, 1, 45250000000L, 3)], [(False, False, False, True)])
+thirdtest: ([(0, 1, 44320000000L, 2)], [(False, False, True, False)])
+fourthtest: ([(0, 1, 44400000000L, 1)], [(False, True, False, False)])
+fifthtest: ([(0, 1, 43930000000L, 0)], [(True, False, False, False)])
+sixthtest: ([(0, 1, 45630000000L, 3)], [(False, False, False, True)])
+seventhtest: ([(0, 1, 45360000000L, 1)], [(False, True, False, False)])
+eigthtest: ([(0, 1, 45330000000L, 2)], [(False, False, True, False)])
+--------------------------------------------------------------------------------
+0: 66.0 ['firsttest', 'fifthtest']
+1: 64.0 ['fourthtest', 'seventhtest']
+2: 63.0 ['thirdtest', 'eigthtest']
+3: 63.0 ['secondtest', 'sixthtest']
+--------------------------------------------------------------------------------
+firsttest: ([(0, 1, 44730000000L, 0)], [(True, False, False, False)])
+secondtest: ([(0, 1, 45580000000L, 3)], [(False, False, False, True)])
+thirdtest: ([(0, 1, 44650000000L, 2)], [(False, False, True, False)])
+fourthtest: ([(0, 1, 44740000000L, 1)], [(False, True, False, False)])
+fifthtest: ([(0, 1, 44260000000L, 0)], [(True, False, False, False)])
+sixthtest: ([(0, 1, 45960000000L, 3)], [(False, False, False, True)])
+seventhtest: ([(0, 1, 45700000000L, 1)], [(False, True, False, False)])
+eigthtest: ([(0, 1, 45650000000L, 2)], [(False, False, True, False)])
+--------------------------------------------------------------------------------
+0: 66.0 ['firsttest', 'fifthtest']
+1: 68.0 ['fourthtest', 'seventhtest']
+2: 65.0 ['thirdtest', 'eigthtest']
+3: 66.0 ['secondtest', 'sixthtest']
+--------------------------------------------------------------------------------
+firsttest: ([(0, 1, 45040000000L,
