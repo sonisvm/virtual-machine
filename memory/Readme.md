@@ -1,8 +1,9 @@
 ## Instructions to compile
+> gcc -g -Wall -o memory_coordinator memory_coordinator.c -lvirt.
 
-- Use the command `gcc -g -Wall -o memory_coordinator memory_coordinator.c -lvirt`.
 OR
-- Download the `Makefile` into same directory as `memory_coordinator.c` and run the command `make`.
+
+> Run the command `make`.
 
 ## Code Description
 ### Problem statement
