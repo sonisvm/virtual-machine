@@ -10,10 +10,8 @@
 
 typedef struct memStats{
 	virDomainPtr domain;
-	unsigned long  unused; //how much unused memory is present
-	unsigned long  usable; //how much balloon can be inflated
-	unsigned long  memory; //currently assigned memory
-	unsigned long available;
+	unsigned long unused; //how much unused memory is present
+	unsigned long available;//how much memory is available for usage
 }memStats;
 
 typedef struct memStats * memStatsPtr;
@@ -45,12 +43,6 @@ static void updateMemStats(virDomainPtr domain, memStatsPtr memStat){
 	for(int i=0; i<nr_stats; i++){
 		if(stats[i].tag==VIR_DOMAIN_MEMORY_STAT_UNUSED){
 			memStat->unused = stats[i].val;
-		}
-		if(stats[i].tag==VIR_DOMAIN_MEMORY_STAT_USABLE){
-			memStat->usable = stats[i].val;
-		}
-		if(stats[i].tag==VIR_DOMAIN_MEMORY_STAT_ACTUAL_BALLOON){
-			memStat->memory = stats[i].val;
 		}
 		if(stats[i].tag == VIR_DOMAIN_MEMORY_STAT_AVAILABLE){
 			memStat->available = stats[i].val;
@@ -108,11 +100,11 @@ int main(int argc, char* argv[]){
 
 		//if there is a domain which has very less unused memory
 		if(memDomains[least].unused <= LOADED_THRESHOLD){
-			//if the domain with most free memory can afford to give memory, take 50% of usable memory away
+			//if the domain with most free memory can afford to give memory, take memory away
 			if(memDomains[most].unused >= FREE_THRESHOLD){
 				//balloon can be inflated 
 				virDomainSetMemory(memDomains[most].domain, memDomains[most].available-LOADED_THRESHOLD);
-				virDomainSetMemory(memDomains[least].domain, memDomains[least].available+FREE_THRESHOLD);
+				virDomainSetMemory(memDomains[least].domain, memDomains[least].available+LOADED_THRESHOLD);
 			} else { //give the memory from host
 				virDomainSetMemory(memDomains[least].domain, memDomains[least].available+FREE_THRESHOLD);
 			}
@@ -125,7 +117,7 @@ int main(int argc, char* argv[]){
 			//go through all domains and take away memory wherever possible
 			for(int i=0; i< numDomains; i++){
 				if(memDomains[i].unused >= FREE_THRESHOLD){
-					virDomainSetMemory(memDomains[i].domain, memDomains[i].available-FREE_THRESHOLD);
+					virDomainSetMemory(memDomains[i].domain, memDomains[i].available-LOADED_THRESHOLD);
 				}
 			}
 		}
