@@ -1,3 +1,9 @@
+## Instructions to compile
+
+- Use the command `gcc -g -Wall -o memory_coordinator memory_coordinator.c -lvirt`.
+OR
+- Download the `Makefile` into same directory as `memory_coordinator.c` and run the command `make`.
+
 ## Code Description
 ### Problem statement
 Given a set of virtual machines having different memory usage, coordinate the memory among the virtual domains so that there is no wastage of memory.
