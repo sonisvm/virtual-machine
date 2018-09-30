@@ -1,5 +1,5 @@
 ## Instructions to compile
->`gcc -g -Wall -o vcpu_scheduler vcpu_scheduler.c -lvirt`
+>gcc -g -Wall -o vcpu_scheduler vcpu_scheduler.c -lvirt
 
 OR
 
