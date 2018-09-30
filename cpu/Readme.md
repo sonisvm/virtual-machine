@@ -1,3 +1,10 @@
+## Instructions to compile
+>`gcc -g -Wall -o vcpu_scheduler vcpu_scheduler.c -lvirt`
+
+OR
+
+> Run the command `make`.
+
 ## Code Description
 ### Problem statement
 Given a set of virtual machines having different workloads, load balance them across the available physical cpus.
