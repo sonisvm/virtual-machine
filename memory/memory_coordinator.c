@@ -10,70 +10,54 @@
 
 typedef struct memStats{
 	virDomainPtr domain;
-	unsigned long long maxMemory;
-	unsigned long long memFree;
-	unsigned long long inflated; //whatever was given to hypervisor
+	unsigned long  unused; //how much unused memory is present
+	unsigned long  usable; //how much balloon can be inflated
+	unsigned long  memory; //currently assigned memory
+	unsigned long available;
 }memStats;
 
 typedef struct memStats * memStatsPtr;
 
 
-
-static memStats getMemStats(virDomainPtr domain){
-	virDomainSetMemoryStatsPeriod(domain, 1, VIR_DOMAIN_AFFECT_CURRENT);
-	memStats m;
-	m.domain = domain;
-	//m.maxMemory = virDomainGetMaxMemory(domain);
-
-	m.inflated = 0;
-	int nr_stats = VIR_DOMAIN_MEMORY_STAT_NR;
-	virDomainMemoryStatPtr stats = malloc(sizeof(virDomainMemoryStatStruct)*nr_stats);
-	virDomainMemoryStats(domain, stats, nr_stats, 0);
-	for(int i=0; i<nr_stats; i++){
-		if(stats[i].tag==VIR_DOMAIN_MEMORY_STAT_UNUSED){
-			m.memFree = stats[i].val;
-		}
-		if(stats[i].tag==VIR_DOMAIN_MEMORY_STAT_AVAILABLE){
-			m.maxMemory = stats[i].val;
-		}
-	}
-	return m;
-}
-
-static double getFreeMemPercentage(virConnectPtr conn){
-	//check whether free memory available to host is less than 5%
+static unsigned long getFreeMemInHost(virConnectPtr conn){
 	int nparams=4;
-	unsigned long long total, used;
+	unsigned long freeMem;
 	
 	virNodeMemoryStatsPtr params = malloc(sizeof(virNodeMemoryStats) * nparams);
 	memset(params, 0, sizeof(virNodeMemoryStats) * nparams);
 	virNodeGetMemoryStats(conn,VIR_NODE_MEMORY_STATS_ALL_CELLS, params, &nparams, 0);
 		
 	for(int i=0; i < nparams; i++){
-		if(strcmp(params[i].field,VIR_NODE_MEMORY_STATS_TOTAL)==0){
-			total = params[i].value;
-		} else if(strcmp(params[i].field, VIR_NODE_MEMORY_STATS_FREE)==0){
-			used = params[i].value;
+		 if(strcmp(params[i].field, VIR_NODE_MEMORY_STATS_FREE)==0){
+			freeMem = params[i].value;break;
 		}
 	}
 	free(params);
-	return 100*(total-used)/total;
+	return freeMem;
 }
 
 static void updateMemStats(virDomainPtr domain, memStatsPtr memStat){
-	virDomainSetMemoryStatsPeriod(domain, 1, VIR_DOMAIN_AFFECT_CURRENT);
+	memStat->domain = domain;
+	
 	int nr_stats = VIR_DOMAIN_MEMORY_STAT_NR;
 	virDomainMemoryStatPtr stats = malloc(sizeof(virDomainMemoryStatStruct)*nr_stats);
 	virDomainMemoryStats(domain, stats, nr_stats, 0);
 	for(int i=0; i<nr_stats; i++){
 		if(stats[i].tag==VIR_DOMAIN_MEMORY_STAT_UNUSED){
-			memStat->memFree = stats[i].val;
+			memStat->unused = stats[i].val;
 		}
-		if(stats[i].tag==VIR_DOMAIN_MEMORY_STAT_AVAILABLE){
-			memStat->maxMemory = stats[i].val;
+		if(stats[i].tag==VIR_DOMAIN_MEMORY_STAT_USABLE){
+			memStat->usable = stats[i].val;
+		}
+		if(stats[i].tag==VIR_DOMAIN_MEMORY_STAT_ACTUAL_BALLOON){
+			memStat->memory = stats[i].val;
+		}
+		if(stats[i].tag == VIR_DOMAIN_MEMORY_STAT_AVAILABLE){
+			memStat->available = stats[i].val;
 		}
 
 	}
+
 }
 
 int main(int argc, char* argv[]){
@@ -95,76 +79,57 @@ int main(int argc, char* argv[]){
 
 	memStatsPtr memDomains = malloc(sizeof(memStats)*numDomains);	
 	for(int i=0; i<numDomains; i++){
-		memDomains[i] = getMemStats(activeDomains[i]);			
-		printf("domain=%d,maxMemory=%lld, inflated=%lld, memFree=%lld\n", i,memDomains[i].maxMemory, memDomains[i].inflated, memDomains[i].memFree);fflush(stdout);
+		virDomainSetMemoryStatsPeriod(activeDomains[i], 1, VIR_DOMAIN_AFFECT_CURRENT);			
 	}			
 	
-	int LOADED_THRESHOLD = 15;
-	int FREE_THRESHOLD = 30;
+	int LOADED_THRESHOLD = 150 * 1024;
+	int FREE_THRESHOLD = 200 * 1024;
 
-	while(1){
-		
-		double percentFree;		
+
+	while(1){		
 	
 		for(int i=0; i<numDomains; i++){
 			updateMemStats(activeDomains[i], &memDomains[i]);			
-printf("domain=%d,maxMemory=%lld, inflated=%lld, memFree=%lld\n", i,memDomains[i].maxMemory, memDomains[i].inflated, memDomains[i].memFree);fflush(stdout);
 		}	
-			
-		//find the domain which has least free memory and domain which has max
-		int domMax=-1, domMin=-1;
-		unsigned long long maxFree=0, minFree=INT_MAX;
-		for(int i=0; i<numDomains; i++){
-			if(memDomains[i].memFree > maxFree){
-				maxFree = memDomains[i].memFree;
-				domMax = i;
-			}
-			if(memDomains[i].memFree < minFree){
-				minFree = memDomains[i].memFree;
-				domMin = i;
-			}
-		}
-		printf("Domain with most free=%d\n", domMax);fflush(stdout);
-		printf("Domain with least free=%d\n", domMin);fflush(stdout);
-		
-		double maxPer = 100*(memDomains[domMax].memFree)/memDomains[domMax].maxMemory;
-		double minPer = 100*(memDomains[domMin].memFree)/memDomains[domMin].maxMemory;
 
-		printf("Domain with most free percent=%lf\n", maxPer);fflush(stdout);
-		printf("Domain with least free percent=%lf\n", minPer);fflush(stdout);	
-		
-		//if some domain needs memory
-		if(maxPer >= FREE_THRESHOLD && minPer <= LOADED_THRESHOLD){
-			printf("maxPer > 5 and minPer < 5\n");fflush(stdout);	
-			//take away 50% of free memory from one and give to other one
+		//find the domains with most and least amount of unused memory
+		int most=0, least=0;
+		unsigned long mostMem =memDomains[0].unused, leastMem=memDomains[0].unused;
+		for(int i=1; i<numDomains; i++){
+			if(memDomains[i].unused > mostMem){
+				most = i;
+				mostMem = memDomains[i].unused;
+			}
+			if(memDomains[i].unused < leastMem){
+				leastMem = memDomains[i].unused;
+				least = i;
+			}
+		}	
 
-			printf("D%d  new memory=%lld\n", domMax, (memDomains[domMax].maxMemory - 50*(memDomains[domMax].maxMemory)/100));fflush(stdout);
-			virDomainSetMemory(memDomains[domMax].domain,  (memDomains[domMax].maxMemory - (50*memDomains[domMax].maxMemory)/100)/1024);
-			
-			printf("D%d new memory=%lld\n", domMin, memDomains[domMin].memFree + (50*memDomains[domMax].maxMemory/100));fflush(stdout);
-			virDomainSetMemory(memDomains[domMin].domain,  (memDomains[domMin].maxMemory + (50*memDomains[domMax].maxMemory)/100)/1024);
-		} else if(minPer <= LOADED_THRESHOLD) { 
-			printf("minPer < 5\n");fflush(stdout);	
-			//assign 5% more to domain with least free memory and let hypervisor worry about it
-			printf("D%d new memory=%lld\n", domMin, memDomains[domMin].maxMemory + (FREE_THRESHOLD*memDomains[domMin].maxMemory/100));fflush(stdout);
-			virDomainSetMemory(memDomains[domMin].domain,(memDomains[domMin].maxMemory + (FREE_THRESHOLD*memDomains[domMin].maxMemory/100))/1024);
-		} else if(maxPer >= FREE_THRESHOLD){
-			//take away 50% of memory 
-			printf("maxPer > 5\n");fflush(stdout);
-			printf("D%d new memory=%lld\n", domMax,  memDomains[domMax].maxMemory - (50*memDomains[domMax].maxMemory/100));fflush(stdout);
-			virDomainSetMemory(memDomains[domMax].domain, (memDomains[domMax].maxMemory - (50*memDomains[domMax].maxMemory/100))/1024);
+		//if there is a domain which has very less unused memory
+		if(memDomains[least].unused <= LOADED_THRESHOLD){
+			//if the domain with most free memory can afford to give memory, take 50% of usable memory away
+			if(memDomains[most].unused >= FREE_THRESHOLD){
+				//balloon can be inflated 
+				virDomainSetMemory(memDomains[most].domain, memDomains[most].available-LOADED_THRESHOLD);
+				virDomainSetMemory(memDomains[least].domain, memDomains[least].available+FREE_THRESHOLD);
+			} else { //give the memory from host
+				virDomainSetMemory(memDomains[least].domain, memDomains[least].available+FREE_THRESHOLD);
+			}
+		} else if(memDomains[most].unused >= FREE_THRESHOLD){ //there is a domain which is using unnecessary memory
+			virDomainSetMemory(memDomains[most].domain, memDomains[most].available-LOADED_THRESHOLD);
 		}
-		
-		//if host needs more memory, go through all domains, take threshold% away from them
-				
-		percentFree = getFreeMemPercentage(conn);
-		printf("free in host=%lf\n", percentFree);fflush(stdout);
-	
-		if(percentFree <= LOADED_THRESHOLD){
-			for(int i=0; i<numDomains; i++){
-				virDomainSetMemory(memDomains[i].domain, (memDomains[i].maxMemory - (LOADED_THRESHOLD*memDomains[i].maxMemory/100))/1024);
+
+		unsigned long memFreeInHost = getFreeMemInHost(conn);
+		if(memFreeInHost <=LOADED_THRESHOLD){
+			//go through all domains and take away memory wherever possible
+			for(int i=0; i< numDomains; i++){
+				if(memDomains[i].unused >= FREE_THRESHOLD){
+					virDomainSetMemory(memDomains[i].domain, memDomains[i].available-FREE_THRESHOLD);
+				}
 			}
 		}
+
 		sleep(timeInterval);
 		
 	}
